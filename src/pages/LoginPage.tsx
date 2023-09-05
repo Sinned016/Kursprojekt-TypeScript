@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import fetchOptions from "../service/fetchService"
+import { LoginInterface, UserInterface } from "../types/UserInterface"
+ 
 
-interface LoginInterface {
-    username: string;
-    password: string;
-}
 
-const defaultValues: LoginInterface = {
+const defaultLoginValues: LoginInterface = {
     username: "",
     password: ""
 }
 
-export default function LoginPage() {
-    const [LoginValues, setLoginValues] = useState(defaultValues)
+type UserProps = {
+    setCurrentUser: React.Dispatch<React.SetStateAction<UserInterface>>;
+}
 
+export default function LoginPage(props: UserProps) {
+    const [LoginValues, setLoginValues] = useState(defaultLoginValues)
     const navigate = useNavigate()
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -28,21 +30,12 @@ export default function LoginPage() {
     }
 
     async function handleLoginClick() {
-
-        const fetchOptions = {
-            method: "PUT",
-            body: JSON.stringify(LoginValues),
-            headers: {
-                "Content-Type": "application/json",
-              }
-        }
-
-        const res = await fetch("/api/login", fetchOptions)
+        const res = await fetch("/api/login", fetchOptions<LoginInterface>("PUT", LoginValues))
 
         if(res.status !== 400) {
             const data = await res.json()
-            console.log(data)
-            
+            props.setCurrentUser(data)
+            navigate("/home")
         } else {
             alert("Login failed")
         }  
@@ -53,16 +46,16 @@ export default function LoginPage() {
         
         <h1 className='login-title'>Strong n' Epic</h1>
         <div className='login-container'>
-            <label htmlFor="username-field">Användarnamn</label>
+            <label htmlFor="username-field">Username</label>
             <input name="username" value={LoginValues.username} type="text" className='username-field' onChange={handleChange}/>
 
-            <label htmlFor="password-field">Lösenord</label>
+            <label htmlFor="password-field">Password</label>
             <input name="password" value={LoginValues.password} type="password" className='password-field' onChange={handleChange}/>
 
-            <button className='login-btn' onClick={handleLoginClick} type='submit'>Logga in</button>
+            <button className='login-btn' onClick={handleLoginClick} type='submit'>Login</button>
         </div>
 
-        <p>Har du inte ett konto? Skapa här</p>
+        <p className='link'>Already have an account? Sign up <Link to={"/register"}>here</Link> </p>
     </div>
   )
 }
