@@ -1,13 +1,31 @@
 import React from 'react'
-import { WorkoutInterface } from '../types/UserInterface'
+import { UserInterface, WorkoutInterface } from '../types/UserInterface'
+import fetchOptions from '../service/fetchService'
 
 type WorkoutProps = {
     workouts: WorkoutInterface[]
+    currentUser: UserInterface
+    setCurrentUser: React.Dispatch<React.SetStateAction<UserInterface>>;
 }
 
-export default function WorkoutElements(props: WorkoutProps) {
+export default function WorkoutElements({workouts, currentUser, setCurrentUser}: WorkoutProps) {
 
-    const workoutElements = props.workouts.map((workout) => {
+    async function bookWorkout(workoutId: string) {
+        console.log(workoutId)
+        console.log(currentUser.id)
+        const BODY = {
+            workoutId: workoutId,
+            userId: currentUser.id
+        }
+
+        const res = await fetch("/api/users/booking", fetchOptions("POST", BODY))
+        const data = await res.json()
+        
+        setCurrentUser({...currentUser, booked_workouts: data.user.booked_workouts })
+    }
+
+
+    const workoutElements = workouts.map((workout) => {
         return (
             <div className='card' key={workout.id}>
                 <h2>{workout.title}</h2>
@@ -15,7 +33,7 @@ export default function WorkoutElements(props: WorkoutProps) {
                 <p>Date: {workout.date}</p>
                 <p>Time: {workout.time}</p>
                 <p>Duration: {workout.duration} min</p>
-                <button className='book-workout-btn'>Book workout</button>
+                <button onClick={() => bookWorkout(workout.id)} className='book-workout-btn'>Book workout</button>
             </div>
         )
     })

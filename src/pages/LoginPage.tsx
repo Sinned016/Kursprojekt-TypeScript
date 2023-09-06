@@ -12,6 +12,7 @@ const defaultLoginValues: LoginInterface = {
 
 type UserProps = {
     setCurrentUser: React.Dispatch<React.SetStateAction<UserInterface>>;
+    errorMsg?: string;
 }
 
 export default function LoginPage(props: UserProps) {
@@ -34,7 +35,7 @@ export default function LoginPage(props: UserProps) {
 
         if(res.status !== 400) {
             const data = await res.json()
-            props.setCurrentUser(data)
+            props.setCurrentUser(data.user)
             navigate("/home")
         } else {
             alert("Login failed")
@@ -54,6 +55,8 @@ export default function LoginPage(props: UserProps) {
 
             <button className='login-btn' onClick={handleLoginClick} type='submit'>Login</button>
         </div>
+
+        {props.errorMsg && <p className='error-msg'>{props.errorMsg}</p>}
 
         <p className='link'>Already have an account? Sign up <Link to={"/register"}>here</Link> </p>
     </div>

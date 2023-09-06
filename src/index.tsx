@@ -79,7 +79,6 @@ new Server({
       let body = JSON.parse(request.requestBody)
 
       const workout = workoutArray.find((workout) => workout.id === body.workoutId)
-      console.log(workout)
 
       if(workout) {
         const userIndex = userArray.findIndex((user) => user.id === body.userId)
@@ -90,6 +89,17 @@ new Server({
         return new Response(400)
       }
     }) 
+
+    this.delete("/users/booking", (schema, request) => {
+      let body = JSON.parse(request.requestBody)
+
+      const userIndex = userArray.findIndex((user) => user.id === body.userId)
+      const bookedIndex = userArray[userIndex].booked_workouts.findIndex((workout) => workout.id === body.workoutId)
+
+      userArray[userIndex].booked_workouts.splice(bookedIndex)
+
+      return { user: userArray[userIndex] }
+    })
  
     //workouts
     this.get("/workouts", schema => {

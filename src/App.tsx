@@ -16,14 +16,15 @@ const defaultUser: UserInterface = {
 
 function App() {
   const [currentUser, setCurrentUser] = useState(defaultUser)
+  const errorMsg = "You need to log in to access the home page"
   console.log(currentUser)
 
   return (
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={ <LoginPage setCurrentUser={setCurrentUser} />}/>
-          <Route path="/home" element={ <HomePage />}/>
+          <Route path="/" element={ <LoginPage setCurrentUser={setCurrentUser} />} />
+          <Route path="/home" element={currentUser.id !== "" ? <HomePage currentUser={currentUser} setCurrentUser={setCurrentUser}/> : <LoginPage setCurrentUser={setCurrentUser} errorMsg={errorMsg} />} />
           <Route path="/test" element={ <Test />}/>
         </Routes>
       </div>
