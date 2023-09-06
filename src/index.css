@@ -5,6 +5,7 @@
   font-family: "Inknut Antiqua", serif;
 }
 
+/* Login Page */
 .login-title {
   color: white;
   text-align: center;
@@ -78,7 +79,7 @@
   margin-top: 2em;
 }
 
-
+/* Home Page */
 .home-wrapper {
   background: url("../src/assets/sven-mieke-MsCgmHuirDo-unsplash.jpg") no-repeat center center/cover;
   background-attachment: fixed;
@@ -87,8 +88,16 @@
   padding-bottom: 3.5rem;
 }
 
+.home-wrapper-booked {
+  background: url("../src/assets/craig-lovelidge-yDGsn39fbD4-unsplash.jpg") no-repeat center center/cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: white;
+  padding-bottom: 3.5rem;
+}
+
 .card {
-  background-color: #545f717a;
+  background-color: #545f71cc;
   margin: 0 auto;
   margin-bottom: 1em;
   padding: 0.4em;
@@ -96,11 +105,11 @@
   text-align: center;
   padding-bottom: 1.4em;
   width: 90%;
-  
 } 
 
 .card>p {
   text-shadow: 0px 3px 5px black;
+  height: 2.5em;
 }
 
 .card>h2 {
@@ -112,6 +121,14 @@
   align-items: center;
   justify-content: space-around;
 
+  text-shadow: 0px 3px 5px black;
+  box-shadow: 0px 1px 10px black;
+  border-bottom: none;
+  background-color: #363636a2;
+}
+
+.page-title {
+  text-align: center;
   text-shadow: 0px 3px 5px black;
 }
 
@@ -131,6 +148,10 @@
   margin-top: .5em;
 }
 
+.red {
+  background-color: rgb(146, 37, 37);
+}
+
 .book-workout-btn:hover, .book-workout-btn:active {
   background-color: rgb(23, 88, 23);
 }
@@ -146,9 +167,53 @@
 .nav-btn {
   width: 50%;
   padding: .5rem;
+  border: none;
 }
 
 .active {
   background-color: green;
   color: white;
+}
+
+.booked-status {
+  text-align: center;
+}
+
+.admin-link {
+  height: 100%;
+  width: 100%;
+  color: rgb(255, 119, 119);
+  margin-top: 1rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Admin Page */
+.admin-wrapper {
+  background: url("../src/assets/mohamed-fareed-rbSNsoXk-3A-unsplash.jpg") no-repeat center center/cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: white;
+  text-shadow: 0px 3px 5px black;
+  padding-bottom: 3.5rem;
+}
+
+.admin-title {
+  text-align: center;
+}
+
+.delete-btn {
+  padding: .3em 1em;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px black;
+  margin-top: .5em;
+}
+
+.delete-btn:hover, .delete-btn:active {
+  background-color: rgb(104, 27, 27);
 }

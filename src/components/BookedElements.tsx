@@ -28,14 +28,15 @@ export default function BookedElements({currentUser, setCurrentUser}: BookedProp
                 <p>Date: {workout.date}</p>
                 <p>Time: {workout.time}</p>
                 <p>Duration: {workout.duration} min</p>
-                <button onClick={() => cancelWorkout(workout.id)} className='book-workout-btn'>Cancel Workout</button>
+                <button onClick={() => cancelWorkout(workout.id)} className='delete-btn red'>Cancel workout</button>
             </div>
         )
     })
 
   return (
     <div>
-        { BookedElements }
+        <h2 className='page-title'>My Workouts</h2>
+        { currentUser.booked_workouts.length > 0 ? BookedElements : <h3 className='booked-status'>You have no booked Workouts</h3>}
     </div>
   )
 }

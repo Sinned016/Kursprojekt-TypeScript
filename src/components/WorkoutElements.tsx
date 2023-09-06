@@ -40,6 +40,7 @@ export default function WorkoutElements({workouts, currentUser, setCurrentUser}:
 
   return (
     <>
+        <h2 className='page-title'>Book Workouts</h2>
         { workoutElements }
     </>
   )

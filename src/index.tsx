@@ -37,7 +37,7 @@ let workoutArray: WorkoutInterface[] = [
     trainer: "Gertrude Trainersson",
     time: new Date("2023-09-30T20:30").toLocaleTimeString(),
     date: new Date("2023-09-30T20:30").toDateString(),
-    duration: 1
+    duration: 60
   },
   { 
     id: nanoid(),
@@ -45,7 +45,7 @@ let workoutArray: WorkoutInterface[] = [
     trainer: "Arnold Schwarzenegger",
     time: new Date("2023-10-30T12:30").toLocaleTimeString(),
     date: new Date("2023-10-30T12:30").toDateString(),
-    duration: 2
+    duration: 60
   },
   { 
     id: nanoid(),
@@ -53,7 +53,7 @@ let workoutArray: WorkoutInterface[] = [
     trainer: "Yvex Flexible",
     time: new Date("2023-11-25T08:30").toLocaleTimeString(),
     date: new Date("2023-11-25T08:30").toDateString(),
-    duration: 1.5
+    duration: 90
   },
 ]
 
@@ -99,6 +99,7 @@ new Server({
       userArray[userIndex].booked_workouts.splice(bookedIndex)
 
       return { user: userArray[userIndex] }
+
     })
  
     //workouts

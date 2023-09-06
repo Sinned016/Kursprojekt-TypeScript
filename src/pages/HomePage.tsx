@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { UserInterface, WorkoutInterface } from '../types/UserInterface'
 import WorkoutElements from '../components/WorkoutElements'
 import BookedElements from '../components/BookedElements'
+import Header from '../components/Header'
+import { Link } from 'react-router-dom'
 
 const defaultWorkoutValues: WorkoutInterface[] = [{
     id: "",
@@ -29,12 +31,11 @@ export default function HomePage({currentUser, setCurrentUser}: currentUserProps
 
 
   return (
-    <div className='home-wrapper'>
+    <div className={!toggle ? "home-wrapper" : "home-wrapper-booked"}>
 
-        <header className='home-header'>
-            <h1 className='home-title'>Workouts</h1>
-            <p>Username</p>
-        </header>
+        <Header username={currentUser.name}/>
+
+        { currentUser.role === "ADMIN" && <Link className='admin-link' to={"/admin"}>Admin Page &#8594;</Link> }
 
         {!toggle && <WorkoutElements workouts={workouts} currentUser={currentUser} setCurrentUser={setCurrentUser} /> }
         {toggle && <BookedElements currentUser={currentUser} setCurrentUser={setCurrentUser} /> }
