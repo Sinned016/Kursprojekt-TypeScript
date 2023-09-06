@@ -45,7 +45,7 @@ export default function AdminPage({currentUser}: AdminProps) {
 
         <h2 className='admin-title'>Admin Page</h2>
 
-        {!toggle && <AdminUsers currentUser={currentUser} users={users}/> }
+        {!toggle && <AdminUsers users={users} setUsers={setUsers}/> }
 
         <div className='workout-nav'>
             <button onClick={() => setToggle(false)} className={!toggle ? "active nav-btn" : "nav-btn"}>Users</button>

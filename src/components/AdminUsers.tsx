@@ -1,26 +1,57 @@
-import React, { useEffect, useState } from 'react'
-import { UserInterface } from '../types/UserInterface'
+import React, { useState } from 'react'
+import { UserInterface, WorkoutInterface } from '../types/UserInterface'
+import fetchOptions from '../service/fetchService'
 
 type AdminProps = {
-    currentUser: UserInterface
     users: UserInterface[]
+    setUsers: React.Dispatch<React.SetStateAction<UserInterface[]>>;
 }
 
-export default function AdminUsers({currentUser, users}: AdminProps) {
+export default function AdminUsers({ users, setUsers}: AdminProps) {
+    const [toggle, setToggle] = useState({})
 
+    async function deleteUser(userId: string) {
+        const BODY = { userId: userId }
 
-    function deleteUser(Id: string) {
-        if(currentUser.role === "ADMIN") {
-            console.log("Deleted user " + Id)
-        }
+        const res = await fetch("/api/users", fetchOptions("DELETE", BODY))
+        const data = await res.json()
+
+        setUsers(data.users)
     }
+
+    function toggleUserWorkouts(array: WorkoutInterface[]) {
+        const elements = array?.map((workout) => {
+            return (
+                <>
+                <p>{workout.title} {workout.date}</p>
+                </>
+            )
+        })
+        return elements
+    }
+
+    //Special lösning
+    function toggleFunction(id: string) {
+        setToggle({
+          ...toggle,
+          [id]: !toggle[id as keyof typeof toggle],
+        });
+      }
 
     const userElements = users.map((user) => {
         return (
             <div className='card' key={user.id}>
-                <h3>{user.name}</h3>
+                <h3>Username: {user.name}</h3>
                 <p>Role: {user.role}</p>
                 <p>ID: {user.id}</p>
+                <div onClick={() => toggleFunction(user.id)}>
+                    <span className='workouts-toggle'>
+                        Workouts {toggle[user.id as keyof typeof toggle] 
+                        ? (<span>&#8593;</span>) 
+                        : (<span>&#8595;</span>)}</span>
+                    {toggle[user.id as keyof typeof toggle] && toggleUserWorkouts(user.booked_workouts)}
+                </div>
+
                 <button onClick={() => deleteUser(user.id)} className='delete-btn red'>Delete user</button>
             </div>
         )

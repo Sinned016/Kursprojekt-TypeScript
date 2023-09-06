@@ -99,7 +99,15 @@ new Server({
       userArray[userIndex].booked_workouts.splice(bookedIndex)
 
       return { user: userArray[userIndex] }
+    })
 
+    this.delete("/users", (schema, request) => {
+      let body = JSON.parse(request.requestBody)
+
+      const userIndex = userArray.findIndex((user) => user.id === body.userId)
+      userArray.splice(userIndex, 1)
+
+      return {users: userArray}
     })
  
     //workouts

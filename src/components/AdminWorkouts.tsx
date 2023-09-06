@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+
 import { UserInterface } from '../types/UserInterface'
 
 type AdminProps = {
