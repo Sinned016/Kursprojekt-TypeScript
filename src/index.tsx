@@ -35,24 +35,24 @@ let workoutArray: WorkoutInterface[] = [
     id: nanoid(),
     title: "Crossfit",
     trainer: "Gertrude Trainersson",
-    time: new Date("2023-09-30T20:30").toLocaleTimeString(),
-    date: new Date("2023-09-30T20:30").toDateString(),
+    time: new Date("2023-09-30T20:30").toTimeString().substring(0, 5),
+    date: new Date("2023-09-30T20:30").toISOString().split("T")[0],
     duration: 60
   },
   { 
     id: nanoid(),
     title: "Gym with Arnold",
     trainer: "Arnold Schwarzenegger",
-    time: new Date("2023-10-30T12:30").toLocaleTimeString(),
-    date: new Date("2023-10-30T12:30").toDateString(),
+    time: new Date("2023-10-30T12:30").toTimeString().substring(0, 5),
+    date: new Date("2023-10-30T12:30").toISOString().split("T")[0],
     duration: 60
   },
   { 
     id: nanoid(),
     title: "Yoga",
     trainer: "Yvex Flexible",
-    time: new Date("2023-11-25T08:30").toLocaleTimeString(),
-    date: new Date("2023-11-25T08:30").toDateString(),
+    time: new Date("2023-11-25T08:30").toTimeString().substring(0, 5),
+    date: new Date("2023-11-25T08:30").toISOString().split("T")[0],
     duration: 90
   },
 ]
@@ -96,7 +96,7 @@ new Server({
       const userIndex = userArray.findIndex((user) => user.id === body.userId)
       const bookedIndex = userArray[userIndex].booked_workouts.findIndex((workout) => workout.id === body.workoutId)
 
-      userArray[userIndex].booked_workouts.splice(bookedIndex)
+      userArray[userIndex].booked_workouts.splice(bookedIndex, 1)
 
       return { user: userArray[userIndex] }
     })
@@ -119,10 +119,16 @@ new Server({
 
     this.post("/workouts", (schema, request) => {
       let body = JSON.parse(request.requestBody)
-      body.id = nanoid()
-      workoutArray.push(body)
 
-      return { workout: body };
+      if(body.id === "") {
+        body.id = nanoid()
+        workoutArray.push(body)
+      } else {
+        const workoutIndex = workoutArray.findIndex((workout) => workout.id === body.id)
+        workoutArray[workoutIndex] = body;
+      }
+
+      return { workouts: workoutArray };
     })
 
     this.put("/login", (schema, request) => {
@@ -137,7 +143,12 @@ new Server({
       }
     })
 
-    
+    this.delete("/workouts", (schema, request) => {
+      let body = JSON.parse(request.requestBody)
+
+      workoutArray = workoutArray.filter((workout) => workout.id !== body.workoutId);
+      return {workouts: workoutArray};
+    })
   }
 });
 

@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { UserInterface, WorkoutInterface } from '../types/UserInterface'
 import fetchOptions from '../service/fetchService'
 
-type AdminProps = {
+type AdminUserProps = {
     users: UserInterface[]
     setUsers: React.Dispatch<React.SetStateAction<UserInterface[]>>;
 }
 
-export default function AdminUsers({ users, setUsers}: AdminProps) {
+export default function AdminUsers({ users, setUsers}: AdminUserProps) {
     const [toggle, setToggle] = useState({})
 
     async function deleteUser(userId: string) {
@@ -22,12 +22,14 @@ export default function AdminUsers({ users, setUsers}: AdminProps) {
     function toggleUserWorkouts(array: WorkoutInterface[]) {
         const elements = array?.map((workout) => {
             return (
-                <>
-                <p>{workout.title} {workout.date}</p>
-                </>
+            <p>{workout.title} {workout.date}</p>
             )
         })
-        return elements
+        if(elements.length > 0) {
+            return elements
+        } else {
+            return <p>User has no booked workouts</p>
+        }
     }
 
     //Special lösning
