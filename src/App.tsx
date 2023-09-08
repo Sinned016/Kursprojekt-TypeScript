@@ -5,9 +5,10 @@ import LoginPage from './pages/LoginPage';
 import { UserInterface } from './types/UserInterface';
 import HomePage from './pages/HomePage';
 import AdminPage from './pages/AdminPage';
+import RegisterPage from './pages/RegisterPage';
 
 
-const defaultUser: UserInterface = {
+export const defaultUser: UserInterface = {
   id: "",
   name: "",
   password: "",
@@ -29,8 +30,9 @@ function App() {
           <Route path="/home" element={currentUser.id !== "" ? <HomePage currentUser={currentUser} setCurrentUser={setCurrentUser}/> : <LoginPage setCurrentUser={setCurrentUser} errorMsg={errorMsg} />} />
           <Route path='/admin' 
             element={currentUser.role === "ADMIN" ? 
-            <AdminPage currentUser={currentUser}/> : 
+            <AdminPage currentUser={currentUser} setCurrentUser={setCurrentUser}/> : 
             <LoginPage setCurrentUser={setCurrentUser} errorMsg={errorMsgAdmin} />} /> 
+          <Route path="/register" element={<RegisterPage />}/>
           <Route path="/test" element={ <Test />}/>
         </Routes>
       </div>

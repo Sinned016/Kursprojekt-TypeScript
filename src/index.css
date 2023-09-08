@@ -5,6 +5,15 @@
   font-family: "Inknut Antiqua", serif;
 }
 
+body {
+  background-color: rgb(72, 73, 99);
+}
+
+button {
+  cursor: pointer;
+  transition: 400ms;
+}
+
 /* Login Page */
 .login-title {
   color: white;
@@ -16,8 +25,15 @@
 
 .login-wrapper {
   background: url("../src/assets/samuel-girven-VJ2s0c20qCo-unsplash.jpg") no-repeat center center/cover;
-  height: 100vh;
 
+  height: 100vh;
+  position: relative;
+}
+
+.register-wrapper {
+  background: url("../src/assets/george-pagan-iii-SdNMJcc8xt4-unsplash.jpg") no-repeat center center/cover;
+
+  height: 100vh;
   position: relative;
 }
 
@@ -62,6 +78,7 @@
 
 .link {
   color: white;
+  text-shadow: 0px 2px 5px black;
   position: absolute;
   text-align: center;
 
@@ -96,6 +113,18 @@
   padding-bottom: 3.5rem;
 }
 
+.logout-btn {
+  border: none;
+  border-radius: 10px;
+  padding: 0em .8em;
+  margin-bottom: .8em;
+}
+
+.header-user-container {
+  text-align: center;
+
+}
+
 .card {
   position: relative;
   background-color: #545f71cc;
@@ -114,7 +143,7 @@
   height: 2.5em;
 }
 
-.card>h2 {
+.card>h2, .card>h3 {
   text-shadow: 0px 3px 5px black;
 }
 
@@ -156,6 +185,8 @@
 
 .book-workout-btn:disabled {
   background-color: rgba(37, 146, 37, 0.438);
+  cursor: not-allowed;
+  transition: 0;
 }
 
 
@@ -182,7 +213,7 @@
 }
 
 .active {
-  background-color: green;
+  background-color: rgb(97, 97, 97);
   color: white;
 }
 
@@ -212,8 +243,22 @@
   padding-bottom: 3.5rem;
 }
 
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .admin-title {
   text-align: center;
+}
+
+.goback-btn {
+  color: white;
+  border: none;
+  background: none;
+  padding-right: 1em;
+  font-size: 2em;
 }
 
 .delete-btn {
@@ -232,9 +277,13 @@
   background-color: rgb(104, 27, 27);
 }
 
+.x-icon {
+  cursor: pointer;
+}
 
 .workouts-toggle {
   text-decoration: underline 1px rgb(255, 255, 255);
+  cursor: pointer;
 }
 
 .new-workout-card {
@@ -262,13 +311,11 @@
 }
 
 .toggle-new-workout-btn {
-  margin: 0 auto;
   margin-bottom: 1em;
   padding: .3em 1em;
   border: none;
   border-radius: 10px;
   box-shadow: 0px 2px 5px black;
-  margin-left: 1.6em;
 }
 
 .add-workout-btn {
@@ -292,6 +339,7 @@
   align-items: center;
   justify-content: center;
   justify-content: space-between;
+  text-shadow: 0px 2px 5px black;
 }
 
 .edit-btn {
@@ -308,3 +356,72 @@
 .red {
   background-color: rgb(146, 37, 37);
 }
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrow-back {
+  text-shadow: 0px 3px 5px black;
+}
+
+
+
+@media screen and (min-width: 992px) {
+  .card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    /* display: grid;
+    grid-template-columns: repeat(3, 1fr); */
+  }
+
+  .card {
+    width: 30%;
+  }
+
+  .new-workout-card {
+    width: 50%;
+  }
+
+  .book-workout-btn:active, .book-workout-btn:hover {
+    background-color: rgb(23, 88, 23);
+  }
+
+  .book-workout-btn:disabled {
+    background-color: rgba(37, 146, 37, 0.438);
+  }
+
+  .workout-nav {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 1em;
+    border: 2px solid black
+  }
+}
+
+
+@media screen and (min-width: 1500px) {
+  .card-container {
+    /* display: grid;
+    grid-template-columns: repeat(4, 1fr); */
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+
+  }
+
+  .card {
+    width: 22%;
+  }
+
+  .new-workout-card {
+    width: 30%;
+  }
+}
+

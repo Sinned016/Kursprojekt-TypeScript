@@ -50,10 +50,50 @@ let workoutArray: WorkoutInterface[] = [
   { 
     id: nanoid(),
     title: "Yoga",
-    trainer: "Yvex Flexible",
+    trainer: "Yves Flexible",
     time: new Date("2023-11-25T08:30").toTimeString().substring(0, 5),
     date: new Date("2023-11-25T08:30").toISOString().split("T")[0],
     duration: 90
+  },
+  { 
+    id: nanoid(),
+    title: "Spinning",
+    trainer: "Greta Spinnersson",
+    time: new Date("2023-11-25T08:30").toTimeString().substring(0, 5),
+    date: new Date("2023-11-25T08:30").toISOString().split("T")[0],
+    duration: 90
+  },
+  { 
+    id: nanoid(),
+    title: "Karate",
+    trainer: "Chuck Norris",
+    time: new Date("2023-11-25T08:30").toTimeString().substring(0, 5),
+    date: new Date("2023-11-25T08:30").toISOString().split("T")[0],
+    duration: 90
+  },
+  { 
+    id: nanoid(),
+    title: "Jogging",
+    trainer: "Usain Bolt",
+    time: new Date("2023-11-25T08:30").toTimeString().substring(0, 5),
+    date: new Date("2023-11-25T08:30").toISOString().split("T")[0],
+    duration: 30
+  },
+  { 
+    id: nanoid(),
+    title: "Zumba",
+    trainer: "Zoe Zumbasson",
+    time: new Date("2023-11-25T08:30").toTimeString().substring(0, 5),
+    date: new Date("2023-11-25T08:30").toISOString().split("T")[0],
+    duration: 90
+  },
+  { 
+    id: nanoid(),
+    title: "Crossfit",
+    trainer: "Gertrude Trainersson",
+    time: new Date("2023-09-30T20:30").toTimeString().substring(0, 5),
+    date: new Date("2023-09-30T20:30").toISOString().split("T")[0],
+    duration: 60
   },
 ]
 
@@ -67,12 +107,34 @@ new Server({
       return { users: userArray }
     })
 
-    this.post("/users", (schema, request) => {
+    //Login
+    this.put("/login", (schema, request) => {
       let body = JSON.parse(request.requestBody)
-      body.id = nanoid()
-      userArray.push(body)
 
-      return { users: body };
+      const user = userArray.find((user) => user.name === body.name && user.password === body.password )
+
+      if(user) {
+        return { user: user}
+      } else {
+        return new Response(400)
+      }
+    })
+
+    //Register
+    this.post("/register", (schema, request) => {
+      let body = JSON.parse(request.requestBody)
+
+      const user = userArray.find((user) => body.name === user.name)
+
+      if(user) {
+        return new Response(400)
+      } else {
+        body.id = nanoid()
+        body.role = "ADMIN"
+        body.booked_workouts = []
+        userArray.push(body)
+        return { users: body };
+      }
     })
 
     this.post("/users/booking", (schema, request) => {
@@ -103,13 +165,13 @@ new Server({
 
     this.delete("/users", (schema, request) => {
       let body = JSON.parse(request.requestBody)
-
       const userIndex = userArray.findIndex((user) => user.id === body.userId)
       userArray.splice(userIndex, 1)
 
       return {users: userArray}
     })
  
+
     //workouts
     this.get("/workouts", schema => {
       return {
@@ -129,18 +191,6 @@ new Server({
       }
 
       return { workouts: workoutArray };
-    })
-
-    this.put("/login", (schema, request) => {
-      let body = JSON.parse(request.requestBody)
-
-      const user = userArray.find((user) => user.name === body.username && user.password === body.password )
-
-      if(user) {
-        return { user: user}
-      } else {
-        return new Response(400)
-      }
     })
 
     this.delete("/workouts", (schema, request) => {

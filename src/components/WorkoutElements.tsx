@@ -38,8 +38,11 @@ export default function WorkoutElements({workouts, currentUser, setCurrentUser}:
     const workoutElements = workouts.map((workout) => {
         return (
             <div className='card' key={workout.id}>
-                {checkIfBooked(workout) && <p className='booked-status'>Booked</p>}
-                <h2>{workout.title}</h2>
+                <div className='card-header'>
+                    <h3>{workout.title}</h3>
+                    {checkIfBooked(workout) && <p className='booked-status'>Booked</p>}
+                </div>
+
                 <p>Trainer: {workout.trainer}</p>
                 <p>Date: {workout.date}</p>
                 <p>Time: {workout.time}</p>
@@ -52,7 +55,10 @@ export default function WorkoutElements({workouts, currentUser, setCurrentUser}:
   return (
     <>
         <h2 className='page-title'>Book Workouts</h2>
+
+        <div className='card-container'>
         { workoutElements }
+        </div> 
     </>
   )
 }

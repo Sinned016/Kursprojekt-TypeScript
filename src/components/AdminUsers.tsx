@@ -60,7 +60,7 @@ export default function AdminUsers({ users, setUsers}: AdminUserProps) {
     })
 
   return (
-    <div>
+    <div className='card-container'>
         {userElements}
     </div>
   )

@@ -88,7 +88,7 @@ export default function AdminWorkouts({workouts, setWorkouts}: AdminWorkoutProps
     return (
         <div className='card' key={workout.id}>
             <div className="card-header">
-            <h2>{workout.title}</h2>
+            <h3>{workout.title}</h3>
             <button onClick={() => editWorkout(workout)} className='edit-btn'>&#9881;</button>
             </div>
             
@@ -102,9 +102,15 @@ export default function AdminWorkouts({workouts, setWorkouts}: AdminWorkoutProps
 
   return (
     <div>
-      <button className="toggle-new-workout-btn" onClick={() => setToggle(true)}>Add new workout</button>
+      <div className="flex-center">
+        <button className="toggle-new-workout-btn" onClick={() => setToggle(true)}>Add new workout</button>
+      </div>
+      
       {toggle && addWorkoutElement}
-      {workoutElements}
+
+      <div className='card-container'>
+        {workoutElements}
+      </div>
     </div>
   )
 }

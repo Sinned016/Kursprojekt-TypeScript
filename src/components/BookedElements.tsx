@@ -23,7 +23,7 @@ export default function BookedElements({currentUser, setCurrentUser}: BookedProp
     const BookedElements = currentUser.booked_workouts?.map((workout) => {
         return (
             <div className='card' key={workout.id}>
-                <h2>{workout.title}</h2>
+                <h3>{workout.title}</h3>
                 <p>Trainer: {workout.trainer}</p>
                 <p>Date: {workout.date}</p>
                 <p>Time: {workout.time}</p>
@@ -34,9 +34,12 @@ export default function BookedElements({currentUser, setCurrentUser}: BookedProp
     })
 
   return (
-    <div>
+    <>
         <h2 className='page-title'>My Workouts</h2>
-        { currentUser.booked_workouts.length > 0 ? BookedElements : <h3 className='booked-status'>You have no booked Workouts</h3>}
-    </div>
+
+        <div className='card-container'>
+            { currentUser.booked_workouts.length > 0 ? BookedElements : <h3 className='booked-status'>You have no booked Workouts</h3>}
+        </div>
+    </>
   )
 }

@@ -3,9 +3,14 @@ import { UserInterface, WorkoutInterface } from '../types/UserInterface'
 import Header from '../components/Header'
 import AdminUsers from '../components/AdminUsers'
 import AdminWorkouts from '../components/AdminWorkouts'
+import { useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLeftLong } from "@fortawesome/free-solid-svg-icons";
+
 
 type AdminProps = {
     currentUser: UserInterface
+    setCurrentUser: React.Dispatch<React.SetStateAction<UserInterface>>
 }
 
 const defaultUserValues: UserInterface[] = [{
@@ -25,10 +30,12 @@ const defaultWorkoutValues: WorkoutInterface[] = [{
     duration: 0,
 }]
 
-export default function AdminPage({currentUser}: AdminProps) {
+export default function AdminPage({currentUser, setCurrentUser}: AdminProps) {
     const [users, setUsers] = useState(defaultUserValues)
     const [workouts, setWorkouts] = useState(defaultWorkoutValues)
     const [toggle, setToggle] = useState(false)
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch("/api/users")
@@ -42,17 +49,22 @@ export default function AdminPage({currentUser}: AdminProps) {
 
   return (
     <div className='admin-wrapper'>
-        <Header username={currentUser.name}/>
-
-        <h2 className='admin-title'>Admin Page</h2>
-
-        {!toggle && <AdminUsers users={users} setUsers={setUsers}/> }
-        {toggle && <AdminWorkouts workouts={workouts} setWorkouts={setWorkouts}/>}
+        <Header username={currentUser.name} setCurrentUser={setCurrentUser}/>
 
         <div className='workout-nav'>
             <button onClick={() => setToggle(false)} className={!toggle ? "active nav-btn" : "nav-btn"}>Users</button>
             <button onClick={() => setToggle(true)} className={toggle ? "active nav-btn" : "nav-btn"}>Workouts</button>
         </div>
+
+        <div className='title-container'>
+            <button onClick={() => navigate("/home")} className='goback-btn'><FontAwesomeIcon className='arrow-back' icon={faLeftLong}/></button>
+            <h2 className='admin-title'>AdminPage {toggle ? "Workouts" : "Users"}</h2>
+        </div>
+        
+        {!toggle && <AdminUsers users={users} setUsers={setUsers}/> }
+        {toggle && <AdminWorkouts workouts={workouts} setWorkouts={setWorkouts}/>}
+
+
     </div>
   )
 }
