@@ -24,7 +24,7 @@ button {
 }
 
 .login-wrapper {
-  background: url("../src/assets/samuel-girven-VJ2s0c20qCo-unsplash.jpg") no-repeat center center/cover;
+  background: url("../src/assets/javier-santos-guzman-9MR78HGoflw-unsplash.jpg") no-repeat center center/cover;
 
   height: 100vh;
   position: relative;
@@ -81,11 +81,16 @@ button {
   text-shadow: 0px 2px 5px black;
   position: absolute;
   text-align: center;
+  /* background-color: #545f718c; */
 
   bottom: 3rem;
   left: 0;
   right: 0;
   margin: 0 auto;
+}
+
+.link > a {
+  color: rgb(255, 81, 81);
 }
 
 .error-msg {
@@ -371,20 +376,21 @@ button {
 
 @media screen and (min-width: 992px) {
   .card-container {
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: flex-start;
-    /* display: grid;
-    grid-template-columns: repeat(3, 1fr); */
-  }
-
-  .card {
-    width: 30%;
+    align-items: flex-start; */
+    
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30%, max-content));
+    grid-gap: 1rem;
+    justify-content: center;
+    padding: initial;
+    align-items: start;
   }
 
   .new-workout-card {
-    width: 50%;
+    width: 40%;
   }
 
   .book-workout-btn:active, .book-workout-btn:hover {
@@ -407,17 +413,12 @@ button {
 
 @media screen and (min-width: 1500px) {
   .card-container {
-    /* display: grid;
-    grid-template-columns: repeat(4, 1fr); */
-
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-
-  }
-
-  .card {
-    width: 22%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(22%, max-content));
+    grid-gap: 1rem;
+    justify-content: center;
+    padding: initial;
+    align-items: start;
   }
 
   .new-workout-card {

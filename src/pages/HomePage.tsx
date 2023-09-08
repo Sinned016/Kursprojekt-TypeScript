@@ -46,8 +46,6 @@ export default function HomePage({currentUser, setCurrentUser}: currentUserProps
         {!toggle && <WorkoutElements workouts={workouts} currentUser={currentUser} setCurrentUser={setCurrentUser} /> }
         {toggle && <BookedElements currentUser={currentUser} setCurrentUser={setCurrentUser} /> }
 
-
-        
     </div>
   )
 }
