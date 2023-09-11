@@ -20,7 +20,6 @@ export default function WorkoutElements({workouts, currentUser, setCurrentUser}:
 
         const res = await fetch("/api/users/booking", fetchOptions("POST", BODY))
         const data = await res.json()
-        console.log(data)
         
         setCurrentUser({...currentUser, booked_workouts: data.user.booked_workouts })
         alert(`Successfully booked workout`)

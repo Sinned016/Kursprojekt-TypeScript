@@ -215,11 +215,13 @@ button {
   width: 50%;
   padding: .5rem;
   border: none;
+  background-color: #505050;
+  color: white;
 }
 
 .active {
-  background-color: rgb(97, 97, 97);
-  color: white;
+  background-color: rgb(226, 226, 226);
+  color: rgb(0, 0, 0);
 }
 
 .booked-status {
