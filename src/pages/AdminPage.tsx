@@ -30,7 +30,7 @@ const defaultWorkoutValues: WorkoutInterface[] = [{
     duration: 0,
 }]
 
-export default function AdminPage({currentUser, setCurrentUser}: AdminProps) {
+export default function AdminPage({currentUser, setCurrentUser}: AdminProps): JSX.Element {
     const [users, setUsers] = useState(defaultUserValues)
     const [workouts, setWorkouts] = useState(defaultWorkoutValues)
     const [toggle, setToggle] = useState(false)
@@ -63,8 +63,6 @@ export default function AdminPage({currentUser, setCurrentUser}: AdminProps) {
         
         {!toggle && <AdminUsers users={users} setUsers={setUsers}/> }
         {toggle && <AdminWorkouts workouts={workouts} setWorkouts={setWorkouts}/>}
-
-
     </div>
   )
 }

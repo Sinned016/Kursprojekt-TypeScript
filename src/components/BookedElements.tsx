@@ -7,9 +7,9 @@ type BookedProps = {
     setCurrentUser: React.Dispatch<React.SetStateAction<UserInterface>>;
 }
 
-export default function BookedElements({currentUser, setCurrentUser}: BookedProps) {
+export default function BookedElements({currentUser, setCurrentUser}: BookedProps): JSX.Element {
 
-    async function cancelWorkout(workoutId: string) {
+    async function cancelWorkout(workoutId: string): Promise<void> {
         const BODY = {
             workoutId: workoutId,
             userId: currentUser.id
@@ -20,7 +20,7 @@ export default function BookedElements({currentUser, setCurrentUser}: BookedProp
         setCurrentUser({...currentUser, booked_workouts: data.user.booked_workouts })
     }
 
-    const BookedElements = currentUser.booked_workouts?.map((workout) => {
+    const BookedElements: JSX.Element[] = currentUser.booked_workouts?.map((workout) => {
         return (
             <div className='card' key={workout.id}>
                 <h3>{workout.title}</h3>

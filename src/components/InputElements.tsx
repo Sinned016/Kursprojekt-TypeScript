@@ -8,7 +8,7 @@ type InputElementsProps = {
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
-export default function InputElements({values, handleClick, handleChange}: InputElementsProps) {
+export default function InputElements({values, handleClick, handleChange}: InputElementsProps): JSX.Element {
     //finding the pathname
     const location = useLocation()
     

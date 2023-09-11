@@ -16,11 +16,11 @@ type UserProps = {
     errorMsg?: string;
 }
 
-export default function LoginPage(props: UserProps) {
+export default function LoginPage(props: UserProps): JSX.Element {
     const [LoginValues, setLoginValues] = useState(defaultLoginValues)
     const navigate = useNavigate()
 
-    function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
         const { name, value } = event.target;
 
         setLoginValues((previnputValues) => {
@@ -31,7 +31,7 @@ export default function LoginPage(props: UserProps) {
         });
     }
 
-    async function handleLoginClick() {
+    async function handleLoginClick(): Promise<void> {
         const res = await fetch("/api/login", fetchOptions<LoginInterface>("PUT", LoginValues))
 
         if(res.status !== 400) {

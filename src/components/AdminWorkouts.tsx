@@ -16,12 +16,12 @@ const defaultValue: WorkoutInterface = {
   duration: 60
 }
 
-export default function AdminWorkouts({workouts, setWorkouts}: AdminWorkoutProps) {
+export default function AdminWorkouts({workouts, setWorkouts}: AdminWorkoutProps): JSX.Element {
   const [toggle, setToggle] = useState(false)
   const [inputValues, setInputValues] = useState(defaultValue)
 
   //saving input values when adding a new card or editing a card
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const { name, value } = event.target;
 
     setInputValues((previnputValues) => {
@@ -32,7 +32,7 @@ export default function AdminWorkouts({workouts, setWorkouts}: AdminWorkoutProps
     });
   }
 
-  async function deleteWorkout(workoutId: string) {
+  async function deleteWorkout(workoutId: string): Promise<void> {
     const BODY = {
       workoutId: workoutId
     }
@@ -44,7 +44,7 @@ export default function AdminWorkouts({workouts, setWorkouts}: AdminWorkoutProps
     setToggle(false)
   }
 
-  async function addWorkout(event: React.FormEvent<HTMLFormElement>) {
+  async function addWorkout(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault()
     const res = await fetch("/api/workouts", fetchOptions("POST", inputValues))
     const data = await res.json()
@@ -55,12 +55,12 @@ export default function AdminWorkouts({workouts, setWorkouts}: AdminWorkoutProps
   }
 
   //Edit workout
-  function editWorkout(workout: WorkoutInterface) {
+  function editWorkout(workout: WorkoutInterface): void {
     setInputValues(workout)
     setToggle(true)
   }
 
-  function closeAddEditWorkout() {
+  function closeAddEditWorkout(): void {
     setToggle(false)
     setInputValues(defaultValue)
   }
@@ -84,7 +84,7 @@ export default function AdminWorkouts({workouts, setWorkouts}: AdminWorkoutProps
     </form>
   )
 
-  const workoutElements = workouts.map((workout) => {
+  const workoutElements: JSX.Element[] = workouts.map((workout) => {
     return (
         <div className='card' key={workout.id}>
             <div className="card-header">

@@ -7,10 +7,10 @@ type AdminUserProps = {
     setUsers: React.Dispatch<React.SetStateAction<UserInterface[]>>;
 }
 
-export default function AdminUsers({ users, setUsers}: AdminUserProps) {
+export default function AdminUsers({ users, setUsers}: AdminUserProps): JSX.Element {
     const [toggle, setToggle] = useState({})
 
-    async function deleteUser(userId: string) {
+    async function deleteUser(userId: string): Promise<void> {
         const BODY = { userId: userId }
 
         const res = await fetch("/api/users", fetchOptions("DELETE", BODY))
@@ -19,7 +19,7 @@ export default function AdminUsers({ users, setUsers}: AdminUserProps) {
         setUsers(data.users)
     }
 
-    function toggleUserWorkouts(array: WorkoutInterface[]) {
+    function toggleUserWorkouts(array: WorkoutInterface[]): JSX.Element | JSX.Element[]{
         const elements = array?.map((workout) => {
             return (
             <p>{workout.title} {workout.date}</p>
@@ -33,7 +33,7 @@ export default function AdminUsers({ users, setUsers}: AdminUserProps) {
     }
 
     //Special lösning
-    function toggleFunction(id: string) {
+    function toggleFunction(id: string): void {
         setToggle({
           ...toggle,
           [id]: !toggle[id as keyof typeof toggle],

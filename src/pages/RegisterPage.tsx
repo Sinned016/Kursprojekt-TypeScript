@@ -10,11 +10,11 @@ const defaultRegisterValues: LoginInterface = {
     password: ""
 }
 
-export default function RegisterPage() {
+export default function RegisterPage(): JSX.Element {
     const [registerValues, setRegisterValues] = useState(defaultRegisterValues)
     const navigate = useNavigate()
 
-    function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
         const { name, value } = event.target;
 
         setRegisterValues((previnputValues) => {
@@ -25,7 +25,7 @@ export default function RegisterPage() {
         });
     }
 
-    async function handleRegisterClick() {
+    async function handleRegisterClick(): Promise<void> {
         const res = await fetch("/api/register", fetchOptions<LoginInterface>("POST", registerValues))
         console.log(res)
 

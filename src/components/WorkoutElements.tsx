@@ -8,9 +8,9 @@ type WorkoutProps = {
     setCurrentUser: React.Dispatch<React.SetStateAction<UserInterface>>;
 }
 
-export default function WorkoutElements({workouts, currentUser, setCurrentUser}: WorkoutProps) {
+export default function WorkoutElements({workouts, currentUser, setCurrentUser}: WorkoutProps) : JSX.Element {
 
-    async function bookWorkout(workoutId: string) {
+    async function bookWorkout(workoutId: string): Promise<void> {
         console.log(workoutId)
         console.log(currentUser.id)
         const BODY = {
@@ -26,7 +26,7 @@ export default function WorkoutElements({workouts, currentUser, setCurrentUser}:
         alert(`Successfully booked workout`)
     }
 
-    function checkIfBooked(obj: WorkoutInterface){
+    function checkIfBooked(obj: WorkoutInterface): boolean {
         const isBooked = currentUser.booked_workouts.some((workout) =>
         // Compare the properties you want to check for equality here
         workout.id === obj.id && workout.title === obj.title
@@ -35,7 +35,7 @@ export default function WorkoutElements({workouts, currentUser, setCurrentUser}:
         return isBooked
     } 
 
-    const workoutElements = workouts.map((workout) => {
+    const workoutElements: JSX.Element[] = workouts.map((workout) => {
         return (
             <div className='card' key={workout.id}>
                 <div className='card-header'>

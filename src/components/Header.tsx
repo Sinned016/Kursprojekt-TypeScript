@@ -12,10 +12,10 @@ type HeaderProps = {
 
 
 
-export default function Header({username, setCurrentUser}: HeaderProps) {
+export default function Header({username, setCurrentUser}: HeaderProps): JSX.Element {
   const navigate = useNavigate()
 
-  function logout() {
+  function logout(): void {
     setCurrentUser(defaultUser)
     navigate("/")
   }
